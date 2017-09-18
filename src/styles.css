@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+.primary-color {
+  /* color: #d50000; */
+}
+
+nav {
+  /* background-color: #d50000; */
+}
+
+.card {
+  margin: 1em;
+}
+
+.product-card {
+  width: 320px;
+  height: 400px;
+}
+
+.card .card-image img{
+  width: 100%;
+  max-height: 188px;
+}
+
+i {
+  vertical-align: bottom;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-filters {
+  margin: 2em 0;
+}
