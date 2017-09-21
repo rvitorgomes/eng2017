@@ -5,7 +5,7 @@ import { ProductModel, PRODUCTS_MOCK } from '../product/product-model';
 
 export const PRODUCTS: ProductModel[] = PRODUCTS_MOCK;
 
-const url = 'api/products';
+const url = 'https://coolpons.herokuapp.com/api/products';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
