@@ -22,7 +22,7 @@ import 'rxjs/add/observable/of';
 })
 export class ProductListComponent {
 
-  private products_lists$: Observable<ProductModel[]> = Observable.of(this.ProductService.getProducts());
+  public products_lists$: Observable<ProductModel[]> = Observable.of(this.ProductService.getProducts());
 
   constructor(private ProductService: ProductService) { }
 
