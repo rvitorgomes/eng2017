@@ -40,5 +40,5 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewCh
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductFiltersComponent {
-  // https://www.cuponomia.com.br/
+
 }

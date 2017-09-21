@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 
 import { ProductModel, PRODUCTS_MOCK } from '../product/product-model';
 
-export const PRODUCTS: ProductModel[] = PRODUCTS_MOCK;
+export let PRODUCTS: ProductModel[] = PRODUCTS_MOCK;
 
 const url = 'api/products';
 import 'rxjs/add/operator/toPromise';
@@ -11,10 +11,15 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ProductService {
 
-  constructor(private http: Http) {this.fetchAll();}
+  constructor(private http: Http) {}
 
-  fetchAll() {
-    this.http.get(url).toPromise().then(res => console.log(res)).catch(error => this.handleError(error));
+  fetchAll(): Promise<ProductModel[]> {
+    return this
+      .http
+      .get(url)
+      .toPromise()
+      .then(res => res.json().data)
+      .catch(error => this.handleError(error));
   }
 
   private handleError(error: any): Promise<any> {

@@ -6,6 +6,7 @@ import { ProductModel } from "./product-model";
 import { Observable } from "rxjs/Observable";
 
 import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/fromPromise';
 
 @Component({
   selector: 'app-product-list',
@@ -22,7 +23,7 @@ import 'rxjs/add/observable/of';
 })
 export class ProductListComponent {
 
-  public products_lists$: Observable<ProductModel[]> = Observable.of(this.ProductService.getProducts());
+  public products_lists$: Observable<ProductModel[]> = Observable.fromPromise(this.ProductService.fetchAll());
 
   constructor(private ProductService: ProductService) { }
 
