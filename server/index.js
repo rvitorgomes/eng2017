@@ -3,12 +3,12 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
 
-const mountRoutes = require('./routes');
-mountRoutes(app);
-
 // Run the app by serving the static files
 // in the dist directory
 app.use(express.static(__dirname + '/dist'));
+
+const mountRoutes = require('./routes');
+mountRoutes(app);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
