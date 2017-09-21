@@ -18,7 +18,7 @@ export class ProductService {
       .http
       .get(url)
       .toPromise()
-      .then(res => res.json().data)
+      .then(res => res.json())
       .catch(error => this.handleError(error));
   }
 
