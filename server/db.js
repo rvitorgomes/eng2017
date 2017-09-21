@@ -1,7 +1,6 @@
 const { Pool, Client } = require('pg');
 
 const connectionString = 'postgres://xawaeirdkqxqcz:f31a24ff510a85fb6e151aaaf811f05d3ade7d84a92a77e06e5148f62c0a856b@ec2-23-23-248-247.compute-1.amazonaws.com:5432/dgtlb9gh3uvkg';
-// const connectionString = 'postgres://localhost:3000/';
 
 const pool = new Pool({
   connectionString: connectionString,
