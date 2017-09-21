@@ -5,19 +5,21 @@ const app = express();
 
 // Run the app by serving the static files
 // in the dist directory
-app.use(express.static('../dist'));
+app.use(express.static(__dirname + '/dist'));
 
-const mountRoutes = require('./routes');
+const mountRoutes = require('./server/routes');
 mountRoutes(app);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const port = process.env.PORT || 8080;
+app.listen(process.env.PORT || 8080);
 
-app.listen(port, function () {
-  console.log('Application works!');
-});
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
+})
+
+console.log('Application Listening!');
 
 module.exports = app;
