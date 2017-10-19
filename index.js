@@ -7,14 +7,11 @@ const app = express();
 // in the dist directory
 app.use(express.static(__dirname + '/dist'));
 
-const mountRoutes = require('./server/routes');
-mountRoutes(app);
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 4200);
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/index.html'));

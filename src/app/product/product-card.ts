@@ -19,12 +19,12 @@ import { ProductModel } from './product-model';
       </div>
 
       <div class="card-action">
-        <a href="{{ product.link }}"><i class="material-icons" style="padding-right: 12px">add_shopping_cart</i>Adicionar ao carrinho</a>
+        <a href="{{ product.product_url }}"><i class="material-icons" style="padding-right: 12px">add_shopping_cart</i>Adicionar ao carrinho</a>
       </div>
 
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4">{{ title }}<i class="material-icons right">close</i></span>
-        <p>{{ product.details.text }}</p>
+        <p>{{ product.details }}</p>
       </div>
     </div>
   </div>

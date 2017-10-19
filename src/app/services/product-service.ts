@@ -5,7 +5,7 @@ import { ProductModel, PRODUCTS_MOCK } from '../product/product-model';
 
 export let PRODUCTS: ProductModel[] = PRODUCTS_MOCK;
 
-const url = 'api/products';
+const url = 'https://coolpons-api.herokuapp.com/api';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class ProductService {
   fetchAll(): Promise<ProductModel[]> {
     return this
       .http
-      .get(url)
+      .get(url + '/products/')
       .toPromise()
       .then(res => res.json())
       .catch(error => this.handleError(error));
