@@ -5,29 +5,29 @@ import { ProductModel } from './product-model';
 @Component({
   selector: 'app-product-card',
   template: `
-  <div class="product-card" *ngIf="product">
-    <div class="card sticky-action">
-      <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="{{ imageUrl }}">
+    <div class="product-card card" *ngIf="product">
+
+      <div class="card-image">
+        <img src="{{ pictureMap[product.company] ? pictureMap[product.company] : 'http://materializecss.com/images/office.jpg' }}">
       </div>
 
       <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">
-        {{ product.title }}
-        <i class="material-icons right">more_vert</i></span>
-        <p>{{ product.description }}</p>
+        <span class="card-title grey-text text-darken-4">
+          {{ product.name }}
+        </span>
+        <p>{{ companyMap[product.company] ? companyMap[product.company] : product.company }}</p>
+        <p *ngIf="product.price_discount"> Desconto de <span class="red-text accent-4">R$ {{ product.price_discount }},00</span></p>
+        <p *ngIf="!product.price_discount"> Sem Descontos</p>
       </div>
 
       <div class="card-action">
-        <a href="{{ product.product_url }}"><i class="material-icons" style="padding-right: 12px">add_shopping_cart</i>Adicionar ao carrinho</a>
+        <a href="{{ product.product_url }}">
+          <span class="product-price left">R$ {{ product.price }},00</span>
+          <span class="right"><a routerLink="profile">Resgatar</a></span>
+        </a>
       </div>
 
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">{{ title }}<i class="material-icons right">close</i></span>
-        <p>{{ product.details }}</p>
-      </div>
     </div>
-  </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -36,6 +36,14 @@ export class ProductCardComponent {
   @Input() product: ProductModel;
 
   @Output() addToCart = new EventEmitter();
+
+  public companyMap = ['Uber', 'Cabify', '99 Taxis', 'Ingresso.com'];
+  public pictureMap = [
+    'https://d1a3f4spazzrp4.cloudfront.net/uber-com/1.3.2/d1a3f4spazzrp4.cloudfront.net/images/uber-serp-logo-f6e7549c89.jpg',
+    'https://thumb.lovemondays.com.br/image/f526275cf94944e0a92fc57022592889/logos/f430b2/cabify.png',
+    'http://0800telefone.com/wp-content/uploads/2017/06/99-taxis-logo-2-500x276.png',
+    'https://adrenaline.uol.com.br/files/upload/noticias/2013/11/risastoider/ingresso.png'
+  ];
 
   get imageUrl() {
     return this.product.picture ? this.product.picture : 'http://materializecss.com/images/office.jpg';

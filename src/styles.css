@@ -2,20 +2,28 @@
 
 
 .primary-color {
-  /* color: #d50000; */
+  color: #d50000;
 }
 
 nav {
   /* background-color: #d50000; */
 }
 
-.card {
-  margin: 1em;
+.app-content {
+  margin-top: 72px;
+}
+
+.login-panel {
+  width: 300px;
+  margin: 100px auto;
+}
+.login-panel .title {
+  text-align: center;
 }
 
 .product-card {
-  width: 320px;
-  height: 400px;
+  width: 300px;
+  margin: 8px;
 }
 
 .card .card-image img{
@@ -30,6 +38,7 @@ i {
 .flex {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .product-filters {

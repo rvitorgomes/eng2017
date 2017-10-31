@@ -6,8 +6,13 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewCh
     <div class="product-filters">
         <div>
           <div class="input-field">
-          <input placeholder="Por quais descontos procura ?" id="filter" type="text">
-          <label for="filter">Buscar</label>
+          <input
+            placeholder="Por quais descontos procura?"
+            id="filter"
+            [ngModel]="search"
+            (ngModelChange)="searchChange.next('text', $event)"
+          >
+          <label for="filter"></label>
         </div>
         </div>
         <div>
@@ -19,19 +24,19 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewCh
         <div>
           <label>Empresas</label>
             <p>
-              <input type="checkbox" id="check-1" />
+              <input type="checkbox" id="check-1" [ngModel]="false" (ngModelChange)="searchChange.next('company', 0)" />
               <label for="check-1">Uber</label>
             </p>
             <p>
-              <input type="checkbox" id="check2" />
+              <input type="checkbox" id="check2" [ngModel]="false" (ngModelChange)="searchChange.next('company', 1)" />
               <label for="check2">Cabify</label>
             </p>
             <p>
-              <input type="checkbox" id="check3" />
+              <input type="checkbox" id="check3" [ngModel]="false" (ngModelChange)="searchChange.next('company', 2)" />
               <label for="check3">99 Taxis</label>
             </p>
             <p>
-              <input type="checkbox" id="check4" />
+              <input type="checkbox" id="check4" [ngModel]="false" (ngModelChange)="searchChange.next('company', 3)" />
               <label for="check4">Ingresso.com</label>
             </p>
         </div>
@@ -40,5 +45,15 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewCh
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductFiltersComponent {
+
+  @Input() search: string;
+
+  @Output() searchChange: EventEmitter<string> = new EventEmitter();
+
+
+  teste(ev) {
+    console.log(ev);
+
+  }
 
 }

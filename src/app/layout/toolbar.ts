@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
   <div class="navbar-fixed">
   <nav class="primary-color">
     <div class="nav-wrapper">
-      <a href="#!" class="brand-logo"><i class="material-icons left" style="padding-left: 24px">shopping_cart</i>CoolPons</a>
+      <a routerLink="app" class="brand-logo"><i class="material-icons left" style="padding-left: 24px">shopping_cart</i>CoolPons</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="sass.html"><i class="material-icons right">search</i>Buscar</a></li>
-        <li><a href="badges.html"><i class="material-icons right">person</i>Perfil</a></li>
+        <li><a routerLink="checkout"><i class="material-icons right">add_shopping_cart</i>Carrinho</a></li>
+        <li><a routerLink="profile"><i class="material-icons right">person</i>Perfil</a></li>
       </ul>
     </div>
   </nav>
