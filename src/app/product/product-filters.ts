@@ -10,7 +10,7 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewCh
             placeholder="Por quais descontos procura?"
             id="filter"
             [ngModel]="search"
-            (ngModelChange)="searchChange.next('text', $event)"
+            (ngModelChange)="searchChange.next($event)"
           >
           <label for="filter"></label>
         </div>

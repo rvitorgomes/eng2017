@@ -24,7 +24,7 @@ export class ProductService {
   search(query): Promise<ProductModel[]> {
     return this
       .http
-      .post(url + '/products/search', query)
+      .post(localurl + '/products/search', query)
       .toPromise()
       .then(res => res.json())
       .catch(error => this.handleError(error));
