@@ -7,10 +7,10 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewCh
         <div>
           <div class="input-field">
           <input
-            placeholder="Por quais descontos procura?"
+            placeholder="Pesquisar descontos"
             id="filter"
             [ngModel]="search"
-            (ngModelChange)="searchChange.next('text', $event)"
+            (ngModelChange)="searchChange.next({ query : $event })"
           >
           <label for="filter"></label>
         </div>
@@ -18,25 +18,32 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewCh
         <div>
           <p class="range-field">
             <label for="range">Preço</label>
-            <input type="range" id="range" min="0" max="1000" />
+            <input
+              type="range"
+              id="range"
+              min="0"
+              max="100"
+              [ngModel]="search_price"
+              (ngModelChange)="searchChange.next({ price: $event })"
+            />
           </p>
         </div>
         <div>
           <label>Empresas</label>
             <p>
-              <input type="checkbox" id="check-1" [ngModel]="false" (ngModelChange)="searchChange.next('company', 0)" />
+              <input type="checkbox" id="check-1" [ngModel]="false" (ngModelChange)="searchChange.next({ company: 0 })" />
               <label for="check-1">Uber</label>
             </p>
             <p>
-              <input type="checkbox" id="check2" [ngModel]="false" (ngModelChange)="searchChange.next('company', 1)" />
+              <input type="checkbox" id="check2" [ngModel]="false" (ngModelChange)="searchChange.next({ company: 1 })" />
               <label for="check2">Cabify</label>
             </p>
             <p>
-              <input type="checkbox" id="check3" [ngModel]="false" (ngModelChange)="searchChange.next('company', 2)" />
+              <input type="checkbox" id="check3" [ngModel]="false" (ngModelChange)="searchChange.next({ company: 2 })" />
               <label for="check3">99 Taxis</label>
             </p>
             <p>
-              <input type="checkbox" id="check4" [ngModel]="false" (ngModelChange)="searchChange.next('company', 3)" />
+              <input type="checkbox" id="check4" [ngModel]="false" (ngModelChange)="searchChange.next({ company: 3 })" />
               <label for="check4">Ingresso.com</label>
             </p>
         </div>
@@ -48,12 +55,8 @@ export class ProductFiltersComponent {
 
   @Input() search: string;
 
+  @Input() price_search: number;
+
   @Output() searchChange: EventEmitter<string> = new EventEmitter();
-
-
-  teste(ev) {
-    console.log(ev);
-
-  }
 
 }

@@ -16,7 +16,7 @@ const debounce = require("lodash").debounce;
       <div class="col s3">
         <app-product-filters
           [search]="search"
-          (searchChange)="onSearch($event)"
+          (searchChange)="searchProduct($event)"
         ></app-product-filters>
       </div>
 
@@ -39,34 +39,12 @@ export class LayoutComponent {
   public products: ProductModel[];
   public loading: boolean;
 
-  searchByText = debounce(this._searchByText, 300);
-
-  onSearch(type, data) {
-    switch (type) {
-      case 'text':
-        this.searchByText(data);
-        break;
-      case 'range':
-        this.searchByRange(data.price_min, data.price_max);
-        break;
-      case 'company':
-        this.searchByCompany(data);
-        break;
-      default:
-        break;
-    }
+  searchProduct(query) {
+      this.ProductService.search(query).then(res => (this.products = res)).catch(err => (this.products = []));
   }
 
-  _searchByText(query) {
-      this.ProductService.search({ query }).then(res => (this.products = res)).catch(err => (this.products = []));
-  }
-
-  searchByRange(price_min, price_max) {
-    this.ProductService.search({ price_min, price_max });
-  }
-
-  searchByCompany(company_id) {
-    this.ProductService.search({ company_id });
+  addToCart(product_id) {
+    this.ProductService.addToCart(product_id);
   }
 
   constructor(private ProductService: ProductService) {}
