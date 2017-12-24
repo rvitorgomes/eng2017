@@ -10,30 +10,48 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ProductService {
 
-  constructor(private http: Http) {}
+  private currentSearch: any = {};
 
   fetchAll(): Promise<ProductModel[]> {
     return this
-      .http
-      .get(url + '/products/')
-      .toPromise()
-      .then(res => res.json())
-      .catch(error => this.handleError(error));
+    .http
+    .get(localurl + '/products/')
+    .toPromise()
+    .then(res => res.json())
+    .catch(error => this.handleError(error));
   }
 
-  search(query): Promise<ProductModel[]> {
+  addToCart(id): Promise<any> {
     return this
-      .http
-      .post(localurl + '/products/search', query)
-      .toPromise()
-      .then(res => res.json())
-      .catch(error => this.handleError(error));
+    .http
+    .post(localurl + '/shop/', { id })
+    .toPromise()
+    .then(res => res.json())
+    .catch(error => this.handleError(error));
   }
 
+  search(payload): Promise<ProductModel[]> {
+    const query = Object.assign({}, this.currentSearch, payload);
+    this.currentSearch = query;
+
+    return this.queryProducts(query);
+  }
+
+  queryProducts({ query, company, price }) {
+    return this
+    .http
+    .post(localurl + '/products/search', { query, company, price })
+    .toPromise()
+    .then(res => res.json())
+    .catch(error => this.handleError(error));
+  }
+
+  // Error handler
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // Remove on production
+    console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 
+  constructor(private http: Http) {}
 }
 
