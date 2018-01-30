@@ -3,7 +3,8 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewCh
 @Component({
   selector: 'app-product-filters',
   template: `
-    <div class="product-filters">
+    <div class="product-filters card-panel">
+        <div class="panel-title"><h5>Buscar descontos</h5></div>
         <div>
           <div class="input-field">
           <input
