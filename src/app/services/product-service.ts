@@ -21,7 +21,16 @@ export class ProductService {
     .catch(error => this.handleError(error));
   }
 
-  public addToCart(id): Promise<any> {
+  public addProduct(id): Promise<any> {
+    return this
+    .http
+    .post(url + '/shop/', { id })
+    .toPromise()
+    .then(res => res.json())
+    .catch(error => this.handleError(error));
+  }
+
+  public removeProduct(id): Promise<any> {
     return this
     .http
     .post(url + '/shop/', { id })

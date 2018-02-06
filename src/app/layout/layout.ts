@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy, AfterViewInit, ChangeDetectorRef } 
 
 import { Observable } from "rxjs/Observable";
 import { ProductService } from '../services/product-service';
-import { UserService } from '../services/user-service';
 import { ProductModel } from '../product/product-model';
 
 import { debounce } from 'lodash';
@@ -12,7 +11,7 @@ import { debounce } from 'lodash';
   template: `
   <app-toolbar></app-toolbar>
 
-  <div class="app-content">
+  <div class="app-content container">
     <div class="row">
       <div class="col s3">
         <app-product-filters
@@ -45,15 +44,10 @@ export class LayoutComponent implements AfterViewInit {
       this.ProductService.search(query).then(res => (this.products = res)).catch(err => (this.products = []));
   }
 
-
-  addToCart(product_id) {
-    this.ProductService.addToCart(product_id);
-  }
-
   ngAfterViewInit() {
     this.searchProduct({ query: 'Uber' });
   }
 
-  constructor(private ProductService: ProductService, private UserService: UserService) {}
+  constructor(private ProductService: ProductService) {}
 
 }

@@ -13,7 +13,7 @@ import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
         <span>Coolpons</span>
       </a>
       <ul class="right hide-on-med-and-down">
-        <li><a routerLink="checkout"><i class="material-icons right">add_shopping_cart</i>Carrinho</a></li>
+        <li><a routerLink="comprar"><i class="material-icons right">add_shopping_cart</i>Carrinho</a></li>
         <li *ngIf="!user"><a routerLink="profile"><i class="material-icons right">person</i>Minha Conta</a></li>
         <li *ngIf="user && user.name"><a routerLink="profile"><i class="material-icons right">person</i>Olá {{ user?.name }}</a></li>
       </ul>

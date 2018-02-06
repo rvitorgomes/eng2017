@@ -11,13 +11,14 @@ import { ToolbarComponent } from './layout/toolbar';
 import { LayoutComponent } from './layout/layout';
 import { FooterComponent } from './layout/footer';
 
+import { CheckoutComponent } from './checkout';
+
 import { ProductCardComponent } from './product/product-card';
 import { ProductListComponent } from './product/product-list';
 import { ProductFiltersComponent } from './product/product-filters';
 
 import { LoginComponent } from './profile/login';
 import { ProfileComponent } from './profile/profile';
-
 import { ProductService } from './services/product-service';
 import { UserService } from './services/user-service';
 import { CookieService } from './services/cookie.service';
@@ -34,7 +35,8 @@ import { CookieService } from './services/cookie.service';
     ProfileComponent,
     ProductCardComponent,
     ProductListComponent,
-    ProductFiltersComponent
+    ProductFiltersComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +57,10 @@ import { CookieService } from './services/cookie.service';
       {
         path: 'profile',
         component: ProfileComponent
+      },
+      {
+        path: 'comprar',
+        component: CheckoutComponent
       },
       {
         path: '**',

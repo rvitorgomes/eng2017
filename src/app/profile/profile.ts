@@ -6,7 +6,7 @@ import { log } from 'util';
   selector: 'app-profile',
   template: `
   <app-toolbar></app-toolbar>
-  <div class="row">
+  <div class="row container">
     <div class="col s12">
       <div class="card">
         <div class="card-image">
