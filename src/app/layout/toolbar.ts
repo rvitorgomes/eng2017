@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { UserService, UserModel } from 'app/services/user-service';
-import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import * as fromRoot from 'app/core';
+import * as user from 'app/core/actions';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,23 +14,29 @@ import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
         <span>Coolpons</span>
       </a>
       <ul class="right hide-on-med-and-down">
-        <li><a routerLink="comprar"><i class="material-icons right">add_shopping_cart</i>Carrinho</a></li>
-        <li *ngIf="!user"><a routerLink="profile"><i class="material-icons right">person</i>Minha Conta</a></li>
-        <li *ngIf="user && user.name"><a routerLink="profile"><i class="material-icons right">person</i>Olá {{ user?.name }}</a></li>
+        <li>
+          <a routerLink="/comprar">
+          Carrinho
+            <i class="material-icons right" *ngIf="!(cart$ | async)?.length">add_shopping_cart</i>
+            <span class="new badge" *ngIf="(cart$ | async)?.length">{{ (cart$ | async)?.length }}</span>
+          </a>
+        </li>
+        <li *ngIf="!(user$ | async)?.name"><a routerLink="profile"><i class="material-icons right">person</i>Minha Conta</a></li>
+        <li *ngIf="(user$ | async)?.name"><a routerLink="profile"><i class="material-icons right">person</i>Olá {{ (user$ | async)?.name }}</a></li>
       </ul>
     </div>
   </nav>
   `
 })
-export class ToolbarComponent implements AfterViewInit {
+export class ToolbarComponent implements OnInit {
 
-  private user: UserModel;
+  private cart$ = this.store.pipe(select(fromRoot.getCart));
 
-  ngAfterViewInit() {
-    this.UserService.getUser().then(user => {
-      this.user = user;
-    });
+  private user$ = this.store.pipe(select(fromRoot.getUser));
+
+  ngOnInit() {
+    this.store.dispatch(new user.Load());
   }
 
-  constructor(private UserService: UserService) {}
+  constructor(private store: Store<fromRoot.State>) {}
 }

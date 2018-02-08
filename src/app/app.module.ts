@@ -22,6 +22,13 @@ import { ProfileComponent } from './profile/profile';
 import { ProductService } from './services/product-service';
 import { UserService } from './services/user-service';
 import { CookieService } from './services/cookie.service';
+import { SalesService } from 'app/services/sales.service';
+
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from 'app/core';
+import { CollectionEffects } from 'app/core/effects';
 
 // import { external } from './app.routes';
 
@@ -44,6 +51,12 @@ import { CookieService } from './services/cookie.service';
     HttpModule,
     HttpClientModule,
     CommonModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([CollectionEffects]),
+    StoreDevtoolsModule.instrument({
+      name: 'NgRx Book Store DevTools'
+    }),
+
     RouterModule.forRoot([
       {
         path: 'login',
@@ -82,7 +95,8 @@ import { CookieService } from './services/cookie.service';
   providers: [
     CookieService,
     UserService,
-    ProductService
+    ProductService,
+    SalesService
   ],
   bootstrap: [AppComponent]
 })

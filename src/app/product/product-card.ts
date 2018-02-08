@@ -16,15 +16,12 @@ import { ProductModel } from './product-model';
           {{ product.name }}
         </span>
         <p>{{ companyMap[product.company] ? companyMap[product.company] : product.company }}</p>
-        <p *ngIf="product.price_discount"> Desconto de <span class="red-text accent-4">R$ {{ product.price_discount }},00</span></p>
-        <p *ngIf="!product.price_discount"> Sem Descontos</p>
+        <p *ngIf="product.price"> Desconto de <span class="green-text accent-4">R$ {{ product.price }},00</span></p>
+        <p *ngIf="!product.price"> Indisponível </p>
       </div>
 
       <div class="card-action">
-        <a href="{{ product.product_url }}">
-          <span class="product-price left">R$ {{ product.price }},00</span>
-          <span class="right"><a routerLink="profile">Resgatar</a></span>
-        </a>
+        <a style="cursor: pointer" (click)="addToCart.next(product)">Resgatar Cupom</a>
       </div>
 
     </div>

@@ -1,5 +1,7 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import * as fromRoot from 'app/core';
+import * as user from 'app/core/actions';
 import { ProductModel } from "./product-model";
 
 @Component({
@@ -16,6 +18,7 @@ import { ProductModel } from "./product-model";
       <div *ngFor="let product of products">
         <app-product-card
           [product]="product"
+          (addToCart)="addToCart.next($event)"
         ></app-product-card>
       </div>
     </div>
@@ -39,9 +42,6 @@ export class ProductListComponent {
 
   @Input() products: ProductModel[];
   @Input() loading: boolean;
-
-  ngOnChanges() {
-    console.log(this.products);
-  }
+  @Output() addToCart: EventEmitter<any> = new EventEmitter();
 
 }

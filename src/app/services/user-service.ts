@@ -19,11 +19,16 @@ export class UserService {
   public user: UserModel;
 
   public setUserFromCookie(): Promise<UserModel> {
-    const auth_cookie = JSON.parse(this.CookieService.getCookie('auth'));
+    const cookie_raw = this.CookieService.getCookie('auth');
 
-    if (auth_cookie && auth_cookie.user_id) {
+    if (!cookie_raw) return Promise.resolve(new UserModel);
+
+    console.log('raw', cookie_raw);
+    const user_cookie = JSON.parse(cookie_raw);
+
+    if (user_cookie && user_cookie.user_id) {
       console.log('Cookie found');
-      return this.fetchUser(auth_cookie.user_id).then(user => this.user = user);
+      return this.fetchUser(user_cookie.user_id).then(user => this.user = user);
     } else {
       // when its a first contact with the page
       console.log('Cookie not found');
@@ -33,6 +38,8 @@ export class UserService {
   }
 
   public fetchUser(id): Promise<UserModel> {
+    if (!id) return Promise.resolve(new UserModel());
+
     return this
     .http
     .get(`${url}/users/${id}`)
@@ -59,8 +66,8 @@ export class UserService {
   }
 
   public handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+    console.log('An error occurred', error); // for demo purposes only
+    return Promise.resolve(undefined);
   }
 
   constructor(private http: Http, private CookieService: CookieService) {}
